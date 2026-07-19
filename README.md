@@ -89,6 +89,11 @@ Ejemplo:
 }
 ```
 
+Persistencia adicional por módulo:
+- `data/prefire-routes/<mapa>.json` para rutas de Prefire.
+- `data/spawns/<mapa>.json` para spawns custom por mapa (con fallback a spawns por defecto).
+- `data/grenades/<mapa>.json` para lineups de granadas guardadas.
+
 ### Ejemplo: Prefire Mode
 1. Copia tu configuración de prefire a `data/prefire/de_mirage.json`
 2. Ejecuta `!prefire` en el servidor
