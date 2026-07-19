@@ -1,0 +1,38 @@
+# Build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.so
+*.dylib
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.sln.iml
+
+# Dependencies
+packages/
+.nuget/
+*.nuget.props
+*.nuget.targets
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Test results
+TestResults/
+coverage/
+
+# Runtime
+*.pid

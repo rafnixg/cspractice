@@ -1,0 +1,35 @@
+{
+  "mapName": "de_mirage",
+  "nodes": [
+    {
+      "id": 1,
+      "vectorPos": {
+        "x": -984.12,
+        "y": -1420.55,
+        "z": -165.21
+      },
+      "vectorAng": {
+        "pitch": 0.0,
+        "yaw": 90.0,
+        "roll": 0.0
+      },
+      "weaponId": "weapon_ak47",
+      "botDifficulty": 3
+    },
+    {
+      "id": 2,
+      "vectorPos": {
+        "x": -824.33,
+        "y": -1420.22,
+        "z": -165.21
+      },
+      "vectorAng": {
+        "pitch": 0.0,
+        "yaw": 45.0,
+        "roll": 0.0
+      },
+      "weaponId": "weapon_ak47",
+      "botDifficulty": 3
+    }
+  ]
+}
