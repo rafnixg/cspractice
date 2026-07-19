@@ -19,7 +19,11 @@ public sealed class PrefireModule : IPracModule
     public void Load(ModuleContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
-        context.ServerBridge.ExecuteCommand("bot_kick");
+        if (context.Config.Prefire.KickBotsOnLoad)
+        {
+            context.ServerBridge.ExecuteCommand("bot_kick");
+        }
+
         context.Logger.Info("Prefire module loaded.");
     }
 
@@ -27,7 +31,11 @@ public sealed class PrefireModule : IPracModule
     {
         ArgumentNullException.ThrowIfNull(context);
         _activeConfig = null;
-        context.ServerBridge.ExecuteCommand("bot_kick");
+        if (context.Config.Prefire.KickBotsOnUnload)
+        {
+            context.ServerBridge.ExecuteCommand("bot_kick");
+        }
+
         context.Logger.Info("Prefire module unloaded.");
     }
 

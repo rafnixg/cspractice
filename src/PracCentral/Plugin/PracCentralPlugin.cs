@@ -27,7 +27,7 @@ public sealed class PracCentralPlugin : BasePlugin
             var serverBridge = new CounterStrikeSharpServerBridge();
             var conVarAccessor = new CounterStrikeSharpConVarAccessor();
 
-            _pracCentral = new Main(mainThreadDispatcher, serverBridge, conVarAccessor, _logger);
+            _pracCentral = new Main(mainThreadDispatcher, serverBridge, conVarAccessor, ModuleDirectory, _logger);
             _logger.Info("PracCentral plugin loaded successfully.");
         }
         catch (Exception exception)

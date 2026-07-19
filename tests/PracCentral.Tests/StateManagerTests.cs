@@ -1,6 +1,7 @@
 using PracCentral.Core;
 using PracCentral.Core.Contracts;
 using PracCentral.Infrastructure.Logging;
+using PracCentral.Models.Json;
 using PracCentral.Services.Engine;
 using PracCentral.Services.Storage;
 using PracCentral.Services.Threading;
@@ -58,7 +59,8 @@ public sealed class StateManagerTests
             new JsonStorageService(),
             new InputSanitizer(),
             registry,
-            new NullPracLogger());
+            new NullPracLogger(),
+            new PluginConfig());
 
         var modules = new Dictionary<PracMode, IPracModule>
         {

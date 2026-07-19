@@ -6,6 +6,7 @@ namespace PracCentral.Modules.Grenade;
 public sealed class GrenadeModule : IPracModule
 {
     private GrenadeThrowSnapshot? _lastThrow;
+    private bool _saveLastThrow = true;
 
     public string Name => "GrenadeModule";
 
@@ -16,6 +17,7 @@ public sealed class GrenadeModule : IPracModule
     public void Load(ModuleContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
+        _saveLastThrow = context.Config.Grenade.SaveLastThrow;
         context.Logger.Info("Grenade module loaded.");
     }
 
@@ -28,6 +30,11 @@ public sealed class GrenadeModule : IPracModule
 
     public void RecordThrow(GrenadeThrowSnapshot snapshot)
     {
+        if (!_saveLastThrow)
+        {
+            return;
+        }
+
         _lastThrow = snapshot;
     }
 

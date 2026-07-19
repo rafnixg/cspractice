@@ -1,6 +1,7 @@
 using PracCentral.Config;
 using PracCentral.Core.Contracts;
 using PracCentral.Infrastructure.Logging;
+using PracCentral.Models.Json;
 using PracCentral.Modules.Aim;
 using PracCentral.Modules.Grenade;
 using PracCentral.Modules.Prefire;
@@ -20,27 +21,44 @@ public sealed class Main
         [".aim"] = PracMode.Aim,
         [".idle"] = PracMode.Idle,
     };
+    private readonly CommandRouter _commandRouter;
 
     public Main(
         IMainThreadDispatcher mainThreadDispatcher,
         IServerBridge serverBridge,
         IConVarAccessor conVarAccessor,
+        string moduleDirectoryPath,
         IPracLogger? logger = null)
     {
         ArgumentNullException.ThrowIfNull(mainThreadDispatcher);
         ArgumentNullException.ThrowIfNull(serverBridge);
         ArgumentNullException.ThrowIfNull(conVarAccessor);
+        ArgumentException.ThrowIfNullOrWhiteSpace(moduleDirectoryPath);
 
         logger ??= new NullPracLogger();
+
+        var jsonStorageService = new JsonStorageService();
+        var inputSanitizer = new InputSanitizer();
+        var pluginConfig = new ConfigService(jsonStorageService)
+            .LoadOrCreateAsync(moduleDirectoryPath)
+            .GetAwaiter()
+            .GetResult();
+        var commandAliases = new CommandAliasStorage(jsonStorageService, inputSanitizer)
+            .LoadOrCreateAsync(moduleDirectoryPath)
+            .GetAwaiter()
+            .GetResult();
 
         var eventSubscriptionRegistry = new EventSubscriptionRegistry();
         var moduleContext = new ModuleContext(
             mainThreadDispatcher,
             serverBridge,
-            new JsonStorageService(),
-            new InputSanitizer(),
+            jsonStorageService,
+            inputSanitizer,
             eventSubscriptionRegistry,
-            logger);
+            logger,
+            pluginConfig);
+
+        _commandRouter = new CommandRouter(_commandToMode, commandAliases);
 
         var moduleByMode = new Dictionary<PracMode, IPracModule>
         {
@@ -69,7 +87,7 @@ public sealed class Main
             return true;
         }
 
-        if (!_commandToMode.TryGetValue(commandText, out var mode))
+        if (!_commandRouter.TryResolveMode(commandText, out var mode))
         {
             return false;
         }

@@ -1,4 +1,5 @@
 using PracCentral.Infrastructure.Logging;
+using PracCentral.Models.Json;
 using PracCentral.Services.Engine;
 using PracCentral.Services.Storage;
 using PracCentral.Services.Threading;
@@ -12,4 +13,5 @@ public sealed record ModuleContext(
     IJsonStorageService JsonStorageService,
     IInputSanitizer InputSanitizer,
     EventSubscriptionRegistry EventSubscriptionRegistry,
-    IPracLogger Logger);
+    IPracLogger Logger,
+    PluginConfig Config);

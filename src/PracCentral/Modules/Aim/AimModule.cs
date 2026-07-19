@@ -19,6 +19,8 @@ public sealed class AimModule : IPracModule
     public void Load(ModuleContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
+        HeadshotOnlyEnabled = context.Config.Aim.HeadshotOnlyEnabled;
+        BulletEconomyEnabled = context.Config.Aim.BulletEconomyEnabled;
         context.Logger.Info("Aim module loaded.");
     }
 

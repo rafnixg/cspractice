@@ -56,6 +56,39 @@ El ensamblado compilado estará en `bin/Release/net8.0/PracCentral.dll`.
 - `!aim` — Activa el módulo de Aim
 - `!idle` — Vuelve al modo Idle
 
+### Configuración del plugin
+En el primer arranque se crea automáticamente `config/praccentral.json` dentro del directorio del plugin con configuración base por modo.
+
+Ejemplo:
+```json
+{
+  "version": "1.0",
+  "aim": {
+    "headshotOnlyEnabled": true,
+    "bulletEconomyEnabled": true
+  },
+  "prefire": {
+    "kickBotsOnLoad": true,
+    "kickBotsOnUnload": true,
+    "dataDirectory": "data\\prefire"
+  },
+  "grenade": {
+    "saveLastThrow": true
+  }
+}
+```
+
+También se crea `config/command-aliases.json` para mapear alias de comandos a comandos reales.
+
+Ejemplo:
+```json
+{
+  ".gr": ".grenade",
+  ".pf": ".prefire",
+  ".hs": ".aim"
+}
+```
+
 ### Ejemplo: Prefire Mode
 1. Copia tu configuración de prefire a `data/prefire/de_mirage.json`
 2. Ejecuta `!prefire` en el servidor
