@@ -10,6 +10,7 @@ namespace PracCentral.Core;
 public sealed record ModuleContext(
     IMainThreadDispatcher MainThreadDispatcher,
     IServerBridge ServerBridge,
+    string ModuleDirectoryPath,
     IJsonStorageService JsonStorageService,
     IInputSanitizer InputSanitizer,
     EventSubscriptionRegistry EventSubscriptionRegistry,

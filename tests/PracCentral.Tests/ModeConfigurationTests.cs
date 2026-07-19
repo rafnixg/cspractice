@@ -73,6 +73,7 @@ public sealed class ModeConfigurationTests
         return new ModuleContext(
             new MainThreadDispatcher(static callback => callback()),
             serverBridge ?? new FakeServerBridge(),
+            "D:\\projectos\\cspractice",
             new JsonStorageService(),
             new InputSanitizer(),
             new EventSubscriptionRegistry(),

@@ -56,6 +56,7 @@ public sealed class StateManagerTests
         var context = new ModuleContext(
             new MainThreadDispatcher(static callback => callback()),
             new FakeServerBridge(),
+            "D:\\projectos\\cspractice",
             new JsonStorageService(),
             new InputSanitizer(),
             registry,

@@ -52,6 +52,7 @@ public sealed class Main
         var moduleContext = new ModuleContext(
             mainThreadDispatcher,
             serverBridge,
+            moduleDirectoryPath,
             jsonStorageService,
             inputSanitizer,
             eventSubscriptionRegistry,
